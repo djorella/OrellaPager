@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'My Pager';
+    src: url('MyPagerRegular.eot');
+    src: url('MyPagerRegular.eot?#iefix') format('embedded-opentype'),
+        url('MyPagerRegular.woff2') format('woff2'),
+        url('MyPagerRegular.woff') format('woff'),
+        url('MyPagerRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

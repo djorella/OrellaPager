@@ -1,0 +1,13 @@
+///Tables needed
+
+USERS 
+	uid
+	ip
+
+TWEETS
+	uid
+	post
+
+FOLLOWS
+	uid
+	follower
