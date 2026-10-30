@@ -1,9 +1,9 @@
 <?php
 
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'orellapager';
+$dbhost = getenv('DB_HOST') ?: 'localhost';
+$dbuser = getenv('DB_USER') ?: 'root';
+$dbpass = getenv('DB_PASS') ?: '';
+$dbname = getenv('DB_NAME') ?: 'orellapager';
 
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 

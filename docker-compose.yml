@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: orellapager
+      DB_NAME: orellapager
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: orellapager
+      MARIADB_DATABASE: orellapager
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  dbdata:
