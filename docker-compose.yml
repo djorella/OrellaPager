@@ -1,13 +1,40 @@
+# Secrets and local overrides live in .env (git-ignored, see .env.example).
 services:
   web:
     build: .
     ports:
-      - "8080:80"
+      # Local: https://localhost:8443. Production: HTTP_PORT=80 HTTPS_PORT=443
+      # so Let's Encrypt can reach the container for renewal.
+      - "${HTTP_PORT:-8080}:80"
+      - "${HTTPS_PORT:-8443}:443"
     environment:
       DB_HOST: db
       DB_USER: root
       DB_PASS: orellapager
       DB_NAME: orellapager
+      HCAPTCHA_SECRET: ${HCAPTCHA_SECRET:?set HCAPTCHA_SECRET in .env}
+      HCAPTCHA_SITEKEY: ${HCAPTCHA_SITEKEY:-6a29ba4e-d39b-4e58-b64a-5b47ba5cbad2}
+      # '-' not ':-': an empty value in .env means 'skip the hostname check'
+      HCAPTCHA_HOSTNAMES: ${HCAPTCHA_HOSTNAMES-orellapager.me,www.orellapager.me}
+      BEEP_COOLDOWN: ${BEEP_COOLDOWN:-60}
+      RETENTION_DAYS: ${RETENTION_DAYS:-30}
+      APP_DEBUG: ${APP_DEBUG:-0}
+      REPORT_EMAIL: ${REPORT_EMAIL:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-orellapager@orellapager.me}
+      SMTP_TLS: ${SMTP_TLS:-on}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-on}
+    volumes:
+      # Let's Encrypt certificates, keys, account and renewal config copied
+      # from the droplet's /etc/letsencrypt. Git-ignored. certbot renews in
+      # place here from the cron job inside the container.
+      - ./letsencrypt:/etc/letsencrypt
+      # purged-ips.log (daily IP retention sweep), rejections.log (blocked
+      # posting attempts) and spam-report-*.txt (monthly summary, emailed).
+      - ./logs:/var/log/orellapager
     depends_on:
       db:
         condition: service_healthy
@@ -16,15 +43,18 @@ services:
     image: mariadb:11
     environment:
       MARIADB_ROOT_PASSWORD: orellapager
-      MARIADB_DATABASE: orellapager
     volumes:
+      # db/init.sql is a mysqldump of the live database (visitor IPs replaced
+      # with placeholders, IPs with no beeps removed). It creates and fills the
+      # orellapager database on the first start of an empty volume.
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - dbdata:/var/lib/mysql
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
       timeout: 5s
-      retries: 20
+      retries: 12
+      start_period: 10m
 
 volumes:
   dbdata:

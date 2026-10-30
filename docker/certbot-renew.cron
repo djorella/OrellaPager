@@ -1,0 +1,13 @@
+# Same schedule as root's crontab on the droplet:
+#   43 6 * * * certbot renew --post-hook "service httpd restart"
+# Apache is reloaded gracefully instead of restarted. Output goes to the
+# container log (stdout of PID 1).
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+43 6 * * * root certbot renew --noninteractive --post-hook "apachectl -k graceful" > /proc/1/fd/1 2>&1
+# Daily sweep: drop IPs older than RETENTION_DAYS that never posted a beep,
+# after appending them to logs/purged-ips.log. Env comes from the entrypoint.
+0 5 * * * root . /etc/orellapager.env && php /usr/local/bin/purge-stale-ips.php > /proc/1/fd/1 2>&1
+# Monthly (1st, 05:10 UTC): summarise blocked bot/honeypot/captcha attempts
+# into logs/spam-report-<date>.txt and email the report to REPORT_EMAIL.
+10 5 1 * * root . /etc/orellapager.env && php /usr/local/bin/spam-report.php > /proc/1/fd/1 2>&1

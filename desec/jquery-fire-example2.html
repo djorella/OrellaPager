@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <script type="text/javascript" src="jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="fire-0.62.min.js"></script>
+    
+
+    <style>
+    .fire{width:300px;height:250px;float:left;}
+    .fire2{width:300px;height:400px;float:left;}
+    </style>
+    <script>
+    <!--
+
+	
+$(document).ready( function(){
+
+	$('.fire').fire({
+		maxPow:9,
+		gravity:0,
+		flameWidth:3,
+		flameHeight:0,
+		plasm:true,
+		fadingFlameSpeed:8,
+		mouseEffect:true	
+	});	
+	$('.fire2').fire();
+});
+-->
+    </script>
+
+</head>
+
+<body>
+<div class="fire"></div>
+<div class="fire" style="height:40px;"></div>
+<div class="fire2"></div>
+
+</body>
+</html>

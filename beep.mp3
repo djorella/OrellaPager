@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Free Sound Clips | SoundBible.com</title>
+  <meta name="author" content="Mike Koenig" />
+  <meta http-equiv="Cache-control" content="public">
+  <meta name="keywords" content="download, download free sound clips, free sound effects, sounds, sound, soundbible, sound clips, free sounds, sound effects, sound bites, audio clips, movie sounds, effects, game sounds"/>
+  <meta name="description" content="SoundBible.com offers free sound clips for download in either wav or mp3 format. We offer free and royalty free sound effects and clips for video editors, movie scores, ......."/>
+		
+
+  <meta name="keywords" content="download, download free sound clips, free sound effects, sounds, sound, soundbible, sound clips, free sounds, sound effects, sound bites, audio clips, movie sounds, effects, game sounds"/>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+
+  <!-- scripts needed for audioplayer -->
+  <link rel='stylesheet' type="text/css" href="audioplayer/audioplayer.css"/>
+  <script src="audioplayer/audioplayer.js" type="text/javascript"></script>
+  <!-- scripts needed for audioplayer END -->
+  
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Adsense Auto Ads Code -->
+  <script data-ad-client="ca-pub-8417283882784443" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  
+</head>
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo mr-auto"><a href="http://soundbible.com/"><img src="img/soundbible-logo.png"></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li><a href="/"><i class="icofont-home"></i> Home</a></li>
+          <li><a href="free-sound-effects-1.html"><i class="icofont-listening"></i> Sound Effects</a></li>
+          <li><a href="royalty-free-sounds-1.html"><i class="icofont-royal"></i> Royalty Free Sounds</a></li>
+          <li><a href="about.php"><i class="icofont-info-circle"></i> About</a></li>
+          <li><a href="http://soundbible.com/blog/"><i class="icofont-blogger"></i> Blog</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+  
+   <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+        <!-- ad space here --->
+        
+        <!-- The form -->
+        <form class="findit" action="search.php" autocomplete="off">
+          <input type="text" placeholder="Search.." name="q">
+        </form>
+        
+        
+      </div>
+    </div><!-- End Breadcrumbs -->
+    
+        <script>
+    window.dzsvg_settings = {
+      merge_share_and_embed_into_one: "on"
+    }
+    </script>
+  <!-- scripts needed for audioplayer -->
+  <link rel='stylesheet' type="text/css" href="audioplayer/audioplayer.css"/>
+  <script src="audioplayer/audioplayer.js" type="text/javascript"></script>
+  <!-- scripts needed for audioplayer END -->  <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="img/freesounds.jpg" class="img-fluid" alt="Free Sound Effects">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+            <h1>Free Sound Effects</h1>
+            <p>SoundBible.com offers free sound clips for download in either wav or mp3 format. We have free and royalty free sound effects and clips for video editors, movie scores, game designers, and weekend sound warriors.  Downloads are totally free, and upfront with large download buttons to prevent confusion.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <!-- ======= Courses Section ======= -->
+    <section id="courses" class="courses">
+      <div class="container" data-aos="fade-up">
+
+        <!-- Pagination -->
+<nav aria-label="Page navigation example mt-5">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Previous</a>
+        </li>
+
+                <li class="page-item active">
+            <a class="page-link" href="free-sounds.php?page=1"> 1 </a>
+        </li>
+                <li class="page-item ">
+            <a class="page-link" href="free-sounds.php?page=2"> 2 </a>
+        </li>
+                <li class="page-item ">
+            <a class="page-link" href="free-sounds.php?page=3"> 3 </a>
+        </li>
+                <li class="page-item ">
+            <a class="page-link" href="free-sounds.php?page=4"> 4 </a>
+        </li>
+        
+        <li class="page-item ">
+            <a class="page-link" href="?page=2">Next</a>
+        </li>
+    </ul>
+</nav>		 
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+          <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/airplane-landing_daniel_simion.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2219,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2219-Airplane-Landing-Airport.html'>Airplane Landing Airport</a></h3>
+                <p>Large commercial airplane landing at an airport runway.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;399936                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/service-bell_daniel_simion.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2218,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2218-Service-Bell-Help.html'>Service Bell Help</a></h3>
+                <p>Customer ringing service bell in need of help in a store.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;240581                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/heavy-rain-daniel_simon.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2217,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2217-Heavy-Rain-Wind.html'>Heavy Rain Wind</a></h3>
+                <p>Super heavy rainstorm and wind pouring down.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;271592                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/labrador-barking-daniel_simon.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2215,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2215-Labrador-Barking-Dog.html'>Labrador Barking Dog</a></h3>
+                <p>Large dog, breed labrador retriever, barking for 20 seconds. Large and deep barking troll your dog today!.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;231441                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/old-car-engine_daniel_simion.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2214,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2214-Old-Car-Starting.html'>Old Car Starting</a></h3>
+                <p>Old car engine starting up slowly and running. Very old model t car.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;196572                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/alien-spaceship_daniel_simion.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2213,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2213-Alien-Spaceship-UFO.html'>Alien Spaceship UFO</a></h3>
+                <p>UFO or Alien Spacecraft ambience. Sound either from inside the spacecraft, or outside as the craft is landing.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;240607                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/van-sliding-door-daniel_simon.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2212,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2212-Van-Sliding-Door.html'>Van Sliding Door</a></h3>
+                <p>Van door sliding close after loading or picking up kids. Sliding door on a van could be used for a closing door.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;105092                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/harley-davidson-daniel_simon.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2211,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2211-Harley-Davidson.html'>Harley Davidson</a></h3>
+                <p>A Harley Davidson motorcycle idling and revving its engine. It then speeds away.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;126799                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+                    <!-- Start Sound Item-->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+          <script>
+            window.dzsvg_settings = {
+              merge_share_and_embed_into_one: "on"
+            }
+          </script>
+
+
+    <div class="con-maindemo" id="a-demo" style="background-color: #fffffff;">
+    <div class="ap-wrapper center-ap">
+    <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:50;"
+      data-options='{
+      "cueFirstMedia": "on",
+      "autoplayNext": "off",
+      "enable_easing": "on",
+      "playlistTransition": "fade",
+      "mode_normal_video_mode": "one"
+    }'>
+    <!-- options for playlist in data-options -->
+    <div class="items">
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir"
+    data-type="audio"
+    data-source="mp3/sos-morse-code_daniel-simion.mp3"
+    data-options='{
+  "settings_php_handler": "inc/php/publisher.php",
+  "pcm_data_try_to_generate": "on",
+  "pcm_data_try_to_generate_wait_for_real_pcm": "off",
+  "skinwave_wave_mode_canvas_waves_number": 2210,
+  "skinwave_wave_mode_canvas_waves_padding": 0,
+  "skinwave_wave_mode_canvas_reflection_size": 0.30,
+  "design_color_bg": "151515",
+  "design_color_highlight": "4285f4"
+}'><!-- options for player in data-options -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Attribution 3.0</h4>
+                </div>
+
+                <h3><a href='2210-SOS-Morse-Code.html'>SOS Morse Code</a></h3>
+                <p>S.O.S. emergency help request beep in morse code. Need help play this. Continuous sequence of three dots, three dashes, and three dots</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="img/artist/avatar.jpg" class="img-fluid" alt="Daniel Simion">
+                    <span>Daniel Simion</span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;147791                    &nbsp;&nbsp;
+                    <i class="bx bx-star"></i>&nbsp;4/5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <!-- End Sound Item-->
+          
+          
+      
+    </section><!-- End Courses Section -->
+  </div>
+<!-- Pagination -->
+<nav aria-label="Page navigation example mt-5">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Previous</a>
+        </li>
+
+                <li class="page-item active">
+            <a class="page-link" href="free-sounds.php?page=1"> 1 </a>
+        </li>
+                <li class="page-item ">
+            <a class="page-link" href="free-sounds.php?page=2"> 2 </a>
+        </li>
+                <li class="page-item ">
+            <a class="page-link" href="free-sounds.php?page=3"> 3 </a>
+        </li>
+                <li class="page-item ">
+            <a class="page-link" href="free-sounds.php?page=4"> 4 </a>
+        </li>
+        
+        <li class="page-item ">
+            <a class="page-link" href="?page=2">Next</a>
+        </li>
+    </ul>
+</nav>      </div>
+  </main><!-- End #main -->
+
+
+<!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Main Navigation</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i><a href="/">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="free-sound-effects-1.html">Sound Effects</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="royalty-free-sounds-1.html">Royalty Free</a></li>
+            </ul>
+          </div>
+
+     <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Premium Sounds (Paid)</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/blog/2013/100-funny-sound-fx/" title="100 Funny Sound Fx">100 Funny Sound Fx</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/blog/2013/100-war-sound-fx/">100 War Sound Fx Royalty Free</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/blog/2012/royalty-free-nature-sounds/" title="Royalty Free Nature Sounds">Royalty Free Nature Sounds</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/blog/2012/royalty-free-nature-sounds/" title="Nature Sounds">Nature Sounds</a></li>
+            </ul>
+          </div>
+          
+           <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Random</h4>
+            <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="http://soundbible.com/tags-scream.html" title="scream sounds"> Scream Sounds</a></li><li><i class="bx bx-chevron-right"></i> <a href="http://soundbible.com/tags-thunder.html" title="thunder sounds"> Thunder Sounds</a></li><li><i class="bx bx-chevron-right"></i> <a href="http://soundbible.com/tags-laugh.html" title="laugh sounds"> Laugh Sounds</a></li><li><i class="bx bx-chevron-right"></i> <a href="http://soundbible.com/tags-computer.html" title="computer sounds"> Computer Sounds</a></li>            <ul>
+            </ul>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Suggested Sounds</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/tags-gun.html" title="Gun Sounds">Gun Sounds</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/tags-fart.html" title="Fart Sounds">Fart Sounds</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/tags-funny.html" title="Funny Sounds">Funny Sounds</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://soundbible.com/tags-laugh.html" title="Laugh Sounds">Laugh Sounds</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+      <div class="mr-md-auto text-center text-md-left">
+        <div class="copyright">
+          &copy; Copyright 2006-2023 <strong><span>SoundBible.com</span></strong>
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>&nbsp;&middot;&nbsp;<a href="#">About</a>
+          &nbsp;&middot;&nbsp;<a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="https://www.youtube.com/user/freesoundclips" class="youtube" target="_blank"><i class="icofont-youtube-play icofont-1x"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-arrow-up icofont-1x"></i></a>
+
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
