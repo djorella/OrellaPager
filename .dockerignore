@@ -1,0 +1,8 @@
+.git
+OrellaPager/
+node_modules/
+Dockerfile
+.dockerignore
+docker-compose.yml
+db/
+*.zip
