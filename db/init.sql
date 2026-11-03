@@ -252,7 +252,6 @@ INSERT INTO `beeps` VALUES (960,28415,'I am shadowbanned','2024-03-20 19:30:38')
 INSERT INTO `beeps` VALUES (962,27130,'	Lolz Iâ€™m back! \\<h1\\> I am king of this website\\</h1\\>','2024-03-22 20:47:10');
 INSERT INTO `beeps` VALUES (963,27130,'I will get you @ at 28412, 28415','2024-03-22 20:53:07');
 INSERT INTO `beeps` VALUES (1733,38147,'Good news for all us','2025-02-01 14:32:51');
-INSERT INTO `beeps` VALUES (1742,39282,'Dich vu gai goi, mai dam. Lien he 0962117278','2025-02-25 02:28:25');
 INSERT INTO `beeps` VALUES (1773,43096,'hi david you left your  old ucsc id at the mchenry library on campus please come to the circulation desk to retrieve it','2025-05-29 03:17:20');
 /*!40000 ALTER TABLE `beeps` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -324,7 +323,6 @@ INSERT INTO `users` VALUES (12122,'10.0.47.90');
 INSERT INTO `users` VALUES (24698,'10.0.96.122');
 INSERT INTO `users` VALUES (12933,'10.0.50.133');
 INSERT INTO `users` VALUES (12212,'10.0.47.180');
-INSERT INTO `users` VALUES (39282,'10.0.153.114');
 INSERT INTO `users` VALUES (43096,'10.0.168.88');
 INSERT INTO `users` VALUES (41,'10.0.0.41');
 INSERT INTO `users` VALUES (4897,'10.0.19.33');

@@ -65,7 +65,6 @@ RUN rm -rf /var/www/html/docker && chown -R www-data:www-data /var/www/html
 #   BACKUP_KEEP_DAYS  how many days of nightly database backups to keep
 #   HCAPTCHA_SECRET   hCaptcha secret key - REQUIRED, beeps are refused without it
 #   HCAPTCHA_SITEKEY  hCaptcha site key shown in the form
-#   BEEP_COOLDOWN     seconds an IP must wait between beeps
 #   RETENTION_DAYS    days a non-posting visitor IP is kept
 #   APP_DEBUG=1       also send PHP warnings to the browser DevTools console
 #   REPORT_EMAIL      where the monthly spam report goes (needs SMTP_* set)
@@ -75,7 +74,6 @@ ENV DB_HOST=localhost \
     DB_PASS= \
     DB_NAME=orellapager \
     HCAPTCHA_SITEKEY=6a29ba4e-d39b-4e58-b64a-5b47ba5cbad2 \
-    BEEP_COOLDOWN=60 \
     RETENTION_DAYS=30 \
     BACKUP_KEEP_DAYS=14 \
     APP_DEBUG=0
