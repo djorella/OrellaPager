@@ -3,6 +3,7 @@
 services:
   web:
     build: .
+    restart: unless-stopped
     ports:
       # Local: https://localhost:8443. Production: HTTP_PORT=80 HTTPS_PORT=443
       # so Let's Encrypt can reach the container for renewal.
@@ -45,6 +46,7 @@ services:
 
   db:
     image: mariadb:11
+    restart: unless-stopped
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
     volumes:
