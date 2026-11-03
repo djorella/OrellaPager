@@ -16,12 +16,16 @@ if (getenv('APP_DEBUG') === '1') {
 $ip        = $_SERVER['REMOTE_ADDR'];
 $siteKey   = getenv('HCAPTCHA_SITEKEY') ?: '6a29ba4e-d39b-4e58-b64a-5b47ba5cbad2';
 $cooldown  = (int) (getenv('BEEP_COOLDOWN') ?: 60);   // seconds between beeps from one IP
-$maxLength = 140;                                      // size of the beeps.post column
+$maxLength = 140;                                      // beeps.post is varchar(140): 140 bytes
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn = mysqli_connect(getenv('DB_HOST') ?: 'localhost', getenv('DB_USER') ?: 'root',
                        getenv('DB_PASS') ?: '', getenv('DB_NAME') ?: 'orellapager');
-mysqli_set_charset($conn, 'utf8mb4');
+// The tables are latin1 and hold UTF-8 text byte for byte. Talking latin1 to
+// the database keeps those bytes untouched, so every language and emoji is
+// stored and shown correctly. (A utf8mb4 connection garbles old rows and
+// crashes on new Cyrillic or emoji beeps.)
+mysqli_set_charset($conn, 'latin1');
 
 // Run a prepared query. SELECTs return their rows, other statements return [].
 function run($sql, $types = '', ...$params) {
@@ -104,8 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['beep'])) {
 
 	if (($_POST['website'] ?? '') !== '') {
 		reject('honeypot', mb_substr($beep, 0, 80));   // hidden field, only bots fill it: no reply
-	} elseif ($beep === '' || mb_strlen($beep) > $maxLength) {
-		$notice = "Your beep must be between 1 and $maxLength characters.";
+	} elseif ($beep === '' || strlen($beep) > $maxLength) {
+		$notice = "Your beep must be between 1 and $maxLength characters (non-English letters and emoji take 2 to 4 each).";
 	} elseif ($token === '') {
 		reject('no-captcha-token', mb_substr($beep, 0, 80));
 		$notice = 'Please check the captcha form.';
@@ -202,6 +206,22 @@ print <<<EOF
 		.narrow tr td{
 			padding: 0.40em 0.0em
 			background-color: black;
+		}
+		/* Fit the table to the screen: fixed column widths, long words break
+		   instead of stretching the table (and forcing a sideways scroll). */
+		.table { table-layout: fixed; }
+		.table th, .table td { overflow-wrap: break-word; word-break: break-word; }
+		.table th:nth-child(1) { width: 15%; }
+		.table th:nth-child(2) { width: 43%; }
+		.table th:nth-child(3) { width: 25%; }
+		.table th:nth-child(4) { width: 17%; }
+		@media (max-width: 600px) {
+			.table th, .table td { padding: 0.3em 0.35em; font-size: 0.8rem; }
+			.table th, .table td:nth-child(3) { font-size: 0.7rem; }
+		}
+		@media (max-width: 340px) {
+			.table th, .table td { padding: 0.3em 0.2em; }
+			.table td:nth-child(1), .table td:nth-child(4) { font-size: 0.7rem; }
 		}
 		.nope {
 			position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;
