@@ -1,8 +1,13 @@
 .git
-OrellaPager/
-node_modules/
+.gitignore
+.env
+.env.example
 Dockerfile
 .dockerignore
 docker-compose.yml
 db/
+letsencrypt/
+logs/
+backups/
 *.zip
+*.swp

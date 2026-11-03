@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Cursed Image Desecration</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+		
+        <style>
+            body {
+                background-color:black;
+                height: 300vh;
+            }
+            .or {
+                color: orange;
+                font-size: 200%;
+                font-weight: bold;
+                padding-bottom: .2in;
+                text-align: center;
+                display:table-cell;
+                vertical-align:middle;
+
+            }
+			.alignment{
+					text-align: center;
+			}
+            p.text {
+                color:lightsalmon;
+                font-size: 140%;
+            }
+        </style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+		<div class="section">
+				<div class="has-text-center">
+						
+					 <h1 class="has-text-center or">Welcome to Cursed Image desecration!</h1>
+				</div>
+			
+			<p class="text">In some nations you cannot criticize the government, or people who are linked to world leaders and corruption
+			</p>
+			<br>
+			<p class="text">Choose an image to burn!
+			</p>
+			<br>
+			<div class="buttons has-addons is-centered">
+				<input class="button" type="file" accept="image/*" onchange="loadFile(event)">
+				<br>
+				<br>
+				<br>
+			</div>
+			<br>
+
+			<div class="has-addons is-centered">
+					<p class="alignment">
+						<img id="output"/>
+						<script>
+
+						var loadFile = function(event){
+							var output = document.getElementById('output');
+							output.src = URL.createObjectURL(event.target.files[0]);
+							output.onload = function(){
+									URL.revokeObjectURL(output.src)
+							}
+						};
+						</script>
+					</p>
+			</div>
+			<br>
+			<br>
+			<br>
+
+							<div class="back"></div>
+				<div class="light"></div>
+				<div class="content">
+				  <div class="fire">
+				  <div class="bottom"></div>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+				  <figure></figure>
+					</div>
+				  <div class="reverse">
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+				  </div>
+				</div>
+				<p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+				  <defs>
+					<filter id="goo">
+					  <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+					  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+					  <feBlend in="SourceGraphic" in2="goo" />
+					</filter>
+				  </defs>
+				</svg>
+
+
+
+			<div class="buttons has-addons is-centered">
+			<input type="submit" class="button is-warning is-centered" value="Burn!"id="burn"> 
+			
+			</div>
+			
+
+
+
+		</div>
+	</body>
+</html>
+
+
