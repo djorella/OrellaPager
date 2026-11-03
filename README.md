@@ -75,7 +75,7 @@ SMTP_FROM=you@gmail.com
 EOF2
 chmod 600 .env
 ```
-Edit the placeholders with `nano .env`. Do **not** copy your laptop's `.env`: it holds the localhost test captcha keys. Every option is described in `.env.example`.
+Edit the placeholders with `nano .env`. **The site rejects every beep until `HCAPTCHA_SECRET` holds your real key**, so check it before moving on. Do **not** copy your laptop's `.env`: it holds the localhost test captcha keys. Every option is described in `.env.example`.
 
 ### 6. Point DNS at the server
 At your DNS provider, set the `A` records for `orellapager.me` and `www.orellapager.me` to the new droplet's IP (or reassign the Reserved IP). Lower the TTL beforehand if you can. Check with `dig +short orellapager.me`.
