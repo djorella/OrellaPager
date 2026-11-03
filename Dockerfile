@@ -9,7 +9,7 @@ FROM php:8.4.27-apache
 # droplet), cron for the scheduled jobs, msmtp as the sendmail used by PHP's
 # mail() to email the monthly spam report through an SMTP relay.
 RUN apt-get update \
- && apt-get install -y --no-install-recommends certbot python3-certbot-apache cron msmtp msmtp-mta ca-certificates \
+ && apt-get install -y --no-install-recommends certbot python3-certbot-apache cron msmtp msmtp-mta ca-certificates mariadb-client \
  && rm -rf /var/lib/apt/lists/*
 
 # mysqli extension for the MariaDB connection in index.php, production php.ini
@@ -50,6 +50,9 @@ COPY docker/purge-stale-ips.php /usr/local/bin/purge-stale-ips.php
 # index.php) are summarised into /var/log/orellapager (./logs) and emailed to
 # REPORT_EMAIL via SMTP_HOST/SMTP_USER/SMTP_PASS.
 COPY docker/spam-report.php /usr/local/bin/spam-report.php
+# Nightly mysqldump to /var/backups/orellapager (./backups), BACKUP_KEEP_DAYS days.
+COPY docker/backup-db.sh /usr/local/bin/backup-db.sh
+RUN chmod +x /usr/local/bin/backup-db.sh
 
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
@@ -58,7 +61,8 @@ COPY . /var/www/html/
 RUN rm -rf /var/www/html/docker && chown -R www-data:www-data /var/www/html
 
 # Runtime settings (override in docker-compose.yml / .env):
-#   DB_*              database connection
+#   DB_*              database connection (DB_PASS comes from DB_PASSWORD in .env)
+#   BACKUP_KEEP_DAYS  how many days of nightly database backups to keep
 #   HCAPTCHA_SECRET   hCaptcha secret key - REQUIRED, beeps are refused without it
 #   HCAPTCHA_SITEKEY  hCaptcha site key shown in the form
 #   HCAPTCHA_HOSTNAMES hostnames a captcha token may be solved on
@@ -75,6 +79,7 @@ ENV DB_HOST=localhost \
     HCAPTCHA_HOSTNAMES=orellapager.me,www.orellapager.me \
     BEEP_COOLDOWN=60 \
     RETENTION_DAYS=30 \
+    BACKUP_KEEP_DAYS=14 \
     APP_DEBUG=0
 
 EXPOSE 80 443

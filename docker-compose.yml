@@ -1,4 +1,5 @@
 # Secrets and local overrides live in .env (git-ignored, see .env.example).
+# DB_PASSWORD is required: it is the MariaDB root password and the app's DB_PASS.
 services:
   web:
     build: .
@@ -10,7 +11,7 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASS: orellapager
+      DB_PASS: ${DB_PASSWORD:?set DB_PASSWORD in .env}
       DB_NAME: orellapager
       HCAPTCHA_SECRET: ${HCAPTCHA_SECRET:?set HCAPTCHA_SECRET in .env}
       HCAPTCHA_SITEKEY: ${HCAPTCHA_SITEKEY:-6a29ba4e-d39b-4e58-b64a-5b47ba5cbad2}
@@ -19,6 +20,7 @@ services:
       BEEP_COOLDOWN: ${BEEP_COOLDOWN:-60}
       RETENTION_DAYS: ${RETENTION_DAYS:-30}
       APP_DEBUG: ${APP_DEBUG:-0}
+      BACKUP_KEEP_DAYS: ${BACKUP_KEEP_DAYS:-14}
       REPORT_EMAIL: ${REPORT_EMAIL:-}
       SMTP_HOST: ${SMTP_HOST:-}
       SMTP_PORT: ${SMTP_PORT:-587}
@@ -35,6 +37,8 @@ services:
       # purged-ips.log (daily IP retention sweep), rejections.log (blocked
       # posting attempts) and spam-report-*.txt (monthly summary, emailed).
       - ./logs:/var/log/orellapager
+      # Nightly database backups (orellapager-<date>.sql.gz), git-ignored.
+      - ./backups:/var/backups/orellapager
     depends_on:
       db:
         condition: service_healthy
@@ -42,7 +46,7 @@ services:
   db:
     image: mariadb:11
     environment:
-      MARIADB_ROOT_PASSWORD: orellapager
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
     volumes:
       # db/init.sql is a mysqldump of the live database (visitor IPs replaced
       # with placeholders, IPs with no beeps removed). It creates and fills the

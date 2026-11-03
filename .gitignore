@@ -1,4 +1,5 @@
 letsencrypt/
 logs/
+backups/
 .env
 *.zip

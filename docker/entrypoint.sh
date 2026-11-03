@@ -61,7 +61,7 @@ fi
 
 # cron does not see the container environment: hand the settings to the
 # jobs through a root-only file (values single-quoted for sh).
-env | grep -E '^(DB_|RETENTION_DAYS=|PURGE_LOG=|REJECT_LOG=|REPORT_DIR=|REPORT_EMAIL=|SMTP_FROM=)' \
+env | grep -E '^(DB_|RETENTION_DAYS=|PURGE_LOG=|REJECT_LOG=|REPORT_DIR=|REPORT_EMAIL=|SMTP_FROM=|BACKUP_)' \
     | sed "s/'/'\\\\''/g; s/=/='/; s/\$/'/; s/^/export /" > /etc/orellapager.env
 chmod 600 /etc/orellapager.env
 
