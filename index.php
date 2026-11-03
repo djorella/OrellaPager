@@ -223,6 +223,8 @@ print <<<EOF
 			.table th, .table td { padding: 0.3em 0.2em; }
 			.table td:nth-child(1), .table td:nth-child(4) { font-size: 0.7rem; }
 		}
+		/* Sound button on the left, Beep on the right, always on the same line. */
+		.action-row { display: flex; justify-content: space-between; align-items: center; }
 		.nope {
 			position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;
 		}
@@ -250,19 +252,16 @@ print <<<EOF
 					<div class="nope" aria-hidden="true">
 						<label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
 					</div>
-					<div class="buttons is-right pt-4 pb-5">
-						<audio id="play" src="beep-02.wav" type="audio/wav" preload="auto"></audio>
-						<audio id="notif" src="GTA3pager.mp3" type="audio/mpeg">
-						</audio>
-					    <div class="h-captcha" data-sitekey="$safeSiteKey"></div>
-						<br>
+					<audio id="play" src="beep-02.wav" type="audio/wav" preload="auto"></audio>
+					<audio id="notif" src="GTA3pager.mp3" type="audio/mpeg"></audio>
+					<div class="buttons is-right pt-4">
+						<div class="h-captcha" data-sitekey="$safeSiteKey"></div>
+					</div>
+					<div class="action-row pb-5">
+						<button type="button" onclick="playNotif()" class="button is-rounded is-black console" aria-label="Play pager sound"></button>
 						<input onclick="playBeep()" class="button is-rounded is-white console" type=submit value="Beep">
-				</div>
-					
-			
-					
-					</form>	
-					<button onclick="playNotif()" class="button is-rounded is-black console ">
+					</div>
+					</form>
 				</div>
 			</div>
 	</body>
