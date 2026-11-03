@@ -54,7 +54,7 @@ if (!$rows) {
     }
 }
 $out .= "\nReasons: honeypot = hidden form field filled (bot); no-captcha-token = posted without solving the captcha;\n"
-      . "captcha-failed = hCaptcha rejected the token; captcha-wrong-hostname / captcha-stale-token = token not solved on this site or too old.\n";
+      . "captcha-failed = hCaptcha rejected the token (the detail column has its reason).\n";
 
 @mkdir($dir, 0755, true);
 $file = "$dir/spam-report-$stamp.txt";

@@ -1,161 +1,136 @@
 <?php
-// OrellaPager
-//
-// Errors are never displayed on the page. They go to the Apache error log
-// (docker logs) and, when APP_DEBUG=1, to the browser DevTools console.
-error_reporting(E_ALL);
-ini_set('display_errors', '0');
-ini_set('log_errors', '1');
+// OrellaPager: a pager message board. Settings come from environment
+// variables (docker-compose.yml / .env).
 
-$debugMessages = [];
+// Errors never appear on the page. They go to the server log and, with
+// APP_DEBUG=1, to the browser's DevTools console.
+ini_set('display_errors', '0');
+$debug = [];
 if (getenv('APP_DEBUG') === '1') {
-	set_error_handler(function ($errno, $errstr, $errfile, $errline) use (&$debugMessages) {
-		$debugMessages[] = "PHP [$errno] $errstr in " . basename($errfile) . ":$errline";
-		return false; // keep the normal logging too
+	set_error_handler(function ($no, $msg, $file, $line) use (&$debug) {
+		$debug[] = "PHP: $msg (" . basename($file) . ":$line)";
+		return false;
 	});
 }
 
-$dbhost = getenv('DB_HOST') ?: 'localhost';
-$dbuser = getenv('DB_USER') ?: 'root';
-$dbpass = getenv('DB_PASS') ?: '';
-$dbname = getenv('DB_NAME') ?: 'orellapager';
-
-$hcaptchaSiteKey = getenv('HCAPTCHA_SITEKEY') ?: '6a29ba4e-d39b-4e58-b64a-5b47ba5cbad2';
-$beepCooldown    = (int) (getenv('BEEP_COOLDOWN') ?: 60);   // seconds between beeps per IP
-$beepMaxLength   = 140;                                     // beeps.post is varchar(140)
+$ip        = $_SERVER['REMOTE_ADDR'];
+$siteKey   = getenv('HCAPTCHA_SITEKEY') ?: '6a29ba4e-d39b-4e58-b64a-5b47ba5cbad2';
+$cooldown  = (int) (getenv('BEEP_COOLDOWN') ?: 60);   // seconds between beeps from one IP
+$maxLength = 140;                                      // size of the beeps.post column
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+$conn = mysqli_connect(getenv('DB_HOST') ?: 'localhost', getenv('DB_USER') ?: 'root',
+                       getenv('DB_PASS') ?: '', getenv('DB_NAME') ?: 'orellapager');
 mysqli_set_charset($conn, 'utf8mb4');
 
-function query($query) {
-	global $conn;
-	return mysqli_query($conn, $query);
-}
-
-// Run a prepared statement; returns the mysqli_stmt (use ->get_result() for SELECTs).
-function prepared($sql, $types = '', ...$params) {
+// Run a prepared query. SELECTs return their rows, other statements return [].
+function run($sql, $types = '', ...$params) {
 	global $conn;
 	$stmt = mysqli_prepare($conn, $sql);
-	if ($types !== '') {
-		mysqli_stmt_bind_param($stmt, $types, ...$params);
-	}
+	if ($types) mysqli_stmt_bind_param($stmt, $types, ...$params);
 	mysqli_stmt_execute($stmt);
-	return $stmt;
+	$result = mysqli_stmt_get_result($stmt);
+	return $result ? mysqli_fetch_all($result, MYSQLI_ASSOC) : [];
 }
 
-function getSingle($sql, $types = '', ...$params) {
-	$result = prepared($sql, $types, ...$params)->get_result();
-	$row = $result ? mysqli_fetch_row($result) : null;
-	return $row ? $row[0] : null;
+// First column of the first row, or null.
+function one($sql, $types = '', ...$params) {
+	$rows = run($sql, $types, ...$params);
+	return $rows ? array_values($rows[0])[0] : null;
 }
 
-function clientIp() {
-	return $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+function h($text) {
+	return htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
 }
 
-// Records a blocked posting attempt: one tab-separated line per attempt in
-// REJECT_LOG (summarised and emailed monthly by docker/spam-report.php) and a
-// line in the Apache error log.
-function logRejection($reason, $detail = '') {
-	$ip = clientIp();
-	error_log("beep rejected ($reason) from $ip" . ($detail !== '' ? ": $detail" : ''));
-	$file = getenv('REJECT_LOG') ?: '/var/log/orellapager/rejections.log';
-	$line = implode("\t", [gmdate('Y-m-d H:i:s'), $ip, $reason, str_replace(["\t", "\n", "\r"], ' ', $detail)]) . "\n";
-	@file_put_contents($file, $line, FILE_APPEND | LOCK_EX);
+// A blocked posting attempt: logged for the server log and the monthly
+// report (docker/spam-report.php reads these tab-separated lines).
+function reject($reason, $detail = '') {
+	global $ip;
+	error_log("beep rejected ($reason) from $ip $detail");
+	$line = implode("\t", [gmdate('Y-m-d H:i:s'), $ip, $reason, preg_replace('/\s+/', ' ', $detail)]) . "\n";
+	@file_put_contents(getenv('REJECT_LOG') ?: '/var/log/orellapager/rejections.log', $line, FILE_APPEND | LOCK_EX);
 }
 
-// uid of the visitor's IP, or null if this IP has never beeped or pinged.
-// Visitors are NOT stored just for viewing the page: a users row is only
-// created by getOrCreateUid() when they actually beep or ping.
-function getUid() {
-	return getSingle("select uid from users where ip = ?", 's', clientIp());
-}
-
-function getOrCreateUid() {
-	$uid = getUid();
-	if ($uid === null) {
-		prepared("insert ignore into users(ip) values (?)", 's', clientIp());
-		$uid = getUid();
-	}
-	return (int) $uid;
-}
-
-function isPoster($uid) {
-	return getSingle("select 1 from beeps where uid = ? limit 1", 'i', $uid) !== null;
-}
-
-// Server-side hCaptcha check. Fails closed: no secret, no network, wrong
-// hostname or a stale token all count as "not verified".
-function verifyCaptcha($token) {
+// Ask hCaptcha whether the visitor's token is genuine. It is bound to our
+// site key, expires quickly and works only once. Fails closed.
+function captchaPassed($token) {
+	global $ip, $siteKey;
 	$secret = getenv('HCAPTCHA_SECRET');
-	if ($secret === false || $secret === '') {
-		error_log('HCAPTCHA_SECRET is not set; refusing to accept beeps');
+	if (!$secret) {
+		error_log('HCAPTCHA_SECRET is not set, so no beep can be accepted');
 		return false;
 	}
 	$ch = curl_init('https://api.hcaptcha.com/siteverify');
 	curl_setopt_array($ch, [
-		CURLOPT_POST           => true,
-		CURLOPT_POSTFIELDS     => http_build_query([
-			'secret'   => $secret,
-			'response' => $token,
-			'remoteip' => clientIp(),
-			'sitekey'  => $GLOBALS['hcaptchaSiteKey'],
-		]),
+		CURLOPT_POSTFIELDS     => http_build_query(['secret' => $secret, 'response' => $token, 'remoteip' => $ip, 'sitekey' => $siteKey]),
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_TIMEOUT        => 10,
 	]);
-	$body = curl_exec($ch);
-	curl_close($ch);
-	$r = is_string($body) ? json_decode($body, true) : null;
-	if (!is_array($r) || ($r['success'] ?? false) !== true) {
-		logRejection('captcha-failed', json_encode($r['error-codes'] ?? 'no response'));
-		return false;
-	}
-	// The token must have been solved on our own site, not harvested elsewhere.
-	// hCaptcha's public test keys (local development) report a dummy hostname.
-	$testKeys = str_starts_with($secret, '0x0000000000000000') && ($r['hostname'] ?? '') === 'dummy-key-pass';
-	$allowed = array_filter(array_map('trim', explode(',', getenv('HCAPTCHA_HOSTNAMES') ?: 'orellapager.me,www.orellapager.me')));
-	if (!$testKeys && $allowed && !in_array($r['hostname'] ?? '', $allowed, true)) {
-		logRejection('captcha-wrong-hostname', (string) ($r['hostname'] ?? ''));
-		return false;
-	}
-	// And be fresh: solved less than 5 minutes ago.
-	$ts = isset($r['challenge_ts']) ? strtotime($r['challenge_ts']) : false;
-	if ($ts !== false && time() - $ts > 300) {
-		logRejection('captcha-stale-token');
+	$reply = json_decode((string) curl_exec($ch), true);
+	if (($reply['success'] ?? false) !== true) {
+		reject('captcha-failed', json_encode($reply['error-codes'] ?? 'no response'));
 		return false;
 	}
 	return true;
 }
 
-function renderRows($beeps) {
-	global $user;
-	foreach ($beeps as $row) {
-		$uid  = (int) $row['uid'];
-		$post = htmlspecialchars($row['post'] ?? '', ENT_QUOTES, 'UTF-8');
-		$date = htmlspecialchars($row['date'] ?? '', ENT_QUOTES, 'UTF-8');
-
-		$pinged = $user !== null && getSingle("select beeper from pings where uid = ? and beeper = ?", 'ii', $user, $uid) !== null;
-		$ping = $pinged
-			? "<a href=index.php?unping=$uid>Unping</a>"
-			: "<a href=index.php?ping=$uid>Ping!</a>";
-
-		print <<<EOF
-			<tr>
-				<TD class="console">$uid</td>
-				<td class="pager has-text-weight-semibold">$post</td>
-				<td class="console">$date</td>
-				<td class="console">$ping</td>
-			</tr>
-EOF;
+// A visitor is only stored once they beep or ping, never for just looking.
+$user = one("select uid from users where ip = ?", 's', $ip);
+function registerUser() {
+	global $user, $ip;
+	if ($user === null) {
+		run("insert ignore into users(ip) values (?)", 's', $ip);
+		$user = one("select uid from users where ip = ?", 's', $ip);
 	}
 }
 
-function renderBeeps($beeps) {
-	print "<div class='table-container'>";
-	print "<table border=4 bordercolor='white' class='table is-bordered is-narrow is-fullwidth is-centered calc'>";
+// ?ping=N and ?unping=N. Only people who have beeped can be pinged.
+$ping = filter_var($_REQUEST['ping'] ?? null, FILTER_VALIDATE_INT);
+if ($ping && one("select 1 from beeps where uid = ? limit 1", 'i', $ping)) {
+	registerUser();
+	run("insert ignore into pings(uid, beeper) values (?, ?)", 'ii', $user, $ping);
+}
+$unping = filter_var($_REQUEST['unping'] ?? null, FILTER_VALIDATE_INT);
+if ($unping && $user !== null) {
+	run("delete from pings where uid = ? and beeper = ?", 'ii', $user, $unping);
+}
+
+// Posting a beep.
+$notice = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['beep'])) {
+	$beep  = trim((string) $_POST['beep']);
+	$token = (string) ($_POST['h-captcha-response'] ?? '');
+
+	if (($_POST['website'] ?? '') !== '') {
+		reject('honeypot', mb_substr($beep, 0, 80));   // hidden field, only bots fill it: no reply
+	} elseif ($beep === '' || mb_strlen($beep) > $maxLength) {
+		$notice = "Your beep must be between 1 and $maxLength characters.";
+	} elseif ($token === '') {
+		reject('no-captcha-token', mb_substr($beep, 0, 80));
+		$notice = 'Please check the captcha form.';
+	} elseif (!captchaPassed($token)) {
+		$notice = 'Leave you NASTY robot!!!';
+	} else {
+		registerUser();
+		if (one("select 1 from beeps where uid = ? and date > now() - interval ? second limit 1", 'ii', $user, $cooldown)) {
+			$notice = "Slow down! One beep every $cooldown seconds.";
+		} else {
+			run("insert into beeps(uid, post, date) values (?, ?, now())", 'is', $user, $beep);
+			$notice = "Hey " . h($ip) . "! your last beep was: <strong class='pager has-text-white'>" . h($beep) . "</strong>";
+		}
+	}
+}
+
+// Beeps as a table. $pinged lists the uids the visitor has pinged.
+function renderBeeps($beeps, $pinged, $emptyMessage) {
+	if (!$beeps) {
+		print "<p class='has-text-centered has-text-white console'>$emptyMessage</p>";
+		return;
+	}
 	print <<<EOF
+	<div class='table-container'>
+	<table border=4 bordercolor='white' class='table is-bordered is-narrow is-fullwidth is-centered calc'>
 	<tr>
 	<TH class="console">UserId</TH>
 	<th class="console">Beep</th>
@@ -163,70 +138,24 @@ function renderBeeps($beeps) {
 	<th class="console">Pinged Status</th>
 	</tr>
 EOF;
-	renderRows($beeps);
-	print "</table>";
-	print "</div>";
-}
-
-function renderPingedBeeps($beeps) {
-	if (!$beeps) {
-		print "<p class='has-text-centered has-text-white console'>None. Feel free to Ping any beeps in this Pager!!</p>";
-		return;
+	foreach ($beeps as $row) {
+		$uid  = (int) $row['uid'];
+		$post = h($row['post']);
+		$date = h($row['date']);
+		$link = in_array($uid, $pinged) ? "<a href=index.php?unping=$uid>Unping</a>" : "<a href=index.php?ping=$uid>Ping!</a>";
+		print <<<EOF
+		<tr>
+			<TD class="console">$uid</td>
+			<td class="pager has-text-weight-semibold">$post</td>
+			<td class="console">$date</td>
+			<td class="console">$link</td>
+		</tr>
+EOF;
 	}
-	renderBeeps($beeps);
+	print "</table></div>";
 }
 
-$user   = getUid();
-$notice = '';   // message shown under the form
-
-// Ping / unping a beeper. Only real posters can be pinged, so crawlers
-// following ?ping=N links no longer fill the table with junk.
-if (!empty($_REQUEST['ping']) && ctype_digit((string) $_REQUEST['ping'])) {
-	$ping = (int) $_REQUEST['ping'];
-	if (isPoster($ping)) {
-		$user = getOrCreateUid();
-		prepared("insert ignore into pings(uid, beeper) values (?, ?)", 'ii', $user, $ping);
-	}
-}
-if (!empty($_REQUEST['unping']) && ctype_digit((string) $_REQUEST['unping']) && $user !== null) {
-	$unping = (int) $_REQUEST['unping'];
-	prepared("delete from pings where uid = ? and beeper = ?", 'ii', $user, $unping);
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['beep'])) {
-	$beep    = trim((string) $_POST['beep']);
-	$token   = (string) ($_POST['h-captcha-response'] ?? '');
-	$honey   = (string) ($_POST['website'] ?? '');   // hidden field: humans leave it empty
-	$ip      = clientIp();
-
-	if ($honey !== '') {
-		logRejection('honeypot', mb_substr($beep, 0, 80));
-		// Say nothing: bots get no signal that they were detected.
-	} elseif ($beep === '' || mb_strlen($beep) > $beepMaxLength) {
-		$notice = "Your beep must be between 1 and $beepMaxLength characters.";
-	} elseif ($token === '') {
-		logRejection('no-captcha-token', mb_substr($beep, 0, 80));
-		$notice = 'Please check the captcha form.';
-	} elseif (!verifyCaptcha($token)) {
-		$notice = 'Leave you NASTY robot!!!';
-	} else {
-		$user = getOrCreateUid();
-		$last = getSingle("select max(date) from beeps where uid = ?", 'i', $user);
-		$dup  = getSingle("select 1 from beeps where uid = ? and post = ? and date > now() - interval 1 day limit 1", 'is', $user, $beep);
-		if ($last !== null && time() - strtotime($last) < $beepCooldown) {
-			$notice = "Slow down! One beep every $beepCooldown seconds.";
-		} elseif ($dup !== null) {
-			$notice = 'You already beeped that today.';
-		} else {
-			prepared("insert into beeps(uid, post, date) values (?, ?, now())", 'is', $user, $beep);
-			$safeIp   = htmlspecialchars($ip, ENT_QUOTES, 'UTF-8');
-			$safeBeep = htmlspecialchars($beep, ENT_QUOTES, 'UTF-8');
-			$notice = "Hey $safeIp! your last beep was: <strong class='pager has-text-white'>$safeBeep</strong>";
-		}
-	}
-}
-
-$safeSiteKey = htmlspecialchars($hcaptchaSiteKey, ENT_QUOTES, 'UTF-8');
+$safeSiteKey = h($siteKey);
 
 print <<<EOF
 <!DOCTYPE html>
@@ -296,7 +225,7 @@ print <<<EOF
 
 					<form id="beep" method="post">
 					<div class=" is-expanded">
-						<textarea class="textarea is-success is-focus calc pager has-text-weight-semibold" placeholder="Beep anything nostalgic!" name=beep maxlength="$beepMaxLength" required></textarea>
+						<textarea class="textarea is-success is-focus calc pager has-text-weight-semibold" placeholder="Beep anything nostalgic!" name=beep maxlength="$maxLength" required></textarea>
 					</div>	
 					<div class="nope" aria-hidden="true">
 						<label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
@@ -324,41 +253,29 @@ if ($notice !== '') {
 	print "<p class='has-text-centered console has-text-white pt-3'>$notice</p>";
 }
 
-$allBeep = [];
-$result = query("select * from beeps order by date desc");
-while ($row = mysqli_fetch_assoc($result)) {
-	$allBeep[] = $row;
-}
-renderBeeps($allBeep);
-print "<br>";
+$pinged = $user === null ? [] : array_column(run("select beeper from pings where uid = ?", 'i', $user), 'beeper');
 
-
-print "<HR class='has-background-white'>";
-print "<br>";
+renderBeeps(run("select * from beeps order by date desc"), $pinged, 'No beeps yet.');
+print "<br><HR class='has-background-white'><br>";
 
 print "<h2 class='title pager has-text-white has-text-centered has-text-weight-bold'>Users whom you pinged!</h2>";
-$pingedBeep = [];
-if ($user !== null) {
-	$pingedBeeps = prepared("select * from beeps where uid in (select beeper from pings where uid = ?) order by date desc", 'i', $user)->get_result();
-	while ($row = mysqli_fetch_assoc($pingedBeeps)) {
-		$pingedBeep[] = $row;
-	}
-}
-renderPingedBeeps($pingedBeep);
+renderBeeps(
+	$user === null ? [] : run("select * from beeps where uid in (select beeper from pings where uid = ?) order by date desc", 'i', $user),
+	$pinged,
+	'None. Feel free to Ping any beeps in this Pager!!'
+);
 
-print "<br>";
-print "<br>";
+print <<<EOF
+<br><br>
+<center>
+<a class='has-text-centered has-text-white console' href='https://orellapager.me/aboutme/about.html'>About My Creator :D</a>
+</center>
+<br><br>
+EOF;
 
-print "<center>";
-print "<a class='has-text-centered has-text-white console' href='https://orellapager.me/aboutme/about.html'>About My Creator :D</a>";
-print "</center>";
-
-print "<br>";
-print "<br>";
-
-if ($debugMessages) {
+if ($debug) {
 	print "<script>\n";
-	foreach ($debugMessages as $m) {
+	foreach ($debug as $m) {
 		print 'console.warn(' . json_encode($m, JSON_HEX_TAG | JSON_HEX_AMP) . ");\n";
 	}
 	print "</script>\n";

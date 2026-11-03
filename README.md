@@ -62,7 +62,6 @@ cat > .env <<EOF2
 DB_PASSWORD=$(openssl rand -hex 24)
 HCAPTCHA_SITEKEY=6a29ba4e-d39b-4e58-b64a-5b47ba5cbad2
 HCAPTCHA_SECRET=PASTE_YOUR_REAL_HCAPTCHA_SECRET
-HCAPTCHA_HOSTNAMES=orellapager.me,www.orellapager.me
 HTTP_PORT=80
 HTTPS_PORT=443
 
@@ -141,6 +140,6 @@ gunzip < backups/orellapager-YYYY-MM-DD_HHMMSS.sql.gz \
 
 ### Troubleshooting
 - **Browser shows a certificate warning:** `letsencrypt/` was not copied, or was copied with `scp -r`. Redo step 4 and run `docker compose restart web`.
-- **Beeps are rejected with "NASTY robot":** check `logs/rejections.log`. Usually the secret in `.env` is wrong, or `HCAPTCHA_HOSTNAMES` does not list the host you are visiting.
+- **Beeps are rejected with "NASTY robot":** check `logs/rejections.log`. The reason is on the last line. `invalid-input-secret` or `sitekey-secret-mismatch` means `HCAPTCHA_SECRET` or `HCAPTCHA_SITEKEY` in `.env` is wrong. After editing `.env`, run `docker compose up -d` so the container picks it up.
 - **Compose says `set DB_PASSWORD in .env`:** `.env` is missing or lacks that line.
 - **Changed `DB_PASSWORD` and the app cannot connect:** MariaDB only reads the password when the volume is first created. Change it inside the database with `ALTER USER`, or restore a backup into a new volume.
